@@ -143,3 +143,57 @@ mvn test
 - Add pagination for customer listing
 - Enhance metrics with more business insights
 - Implement event sourcing for customer data changes
+
+## Monitoring and Metrics
+
+The Customer Service microservice includes comprehensive monitoring and metrics capabilities:
+
+### Available Metrics
+
+- **Business Metrics**:
+   - Customer creation rate
+   - Customer update rate
+   - Customer deletion rate
+   - Customer age distribution
+   - Request processing times
+   - Active customer count
+
+- **System Metrics**:
+   - JVM memory usage
+   - CPU usage
+   - Garbage collection statistics
+   - Thread information
+   - HTTP request metrics
+
+### Endpoints
+
+- **Prometheus Metrics**: `/actuator/prometheus`
+- **Health Check**: `/actuator/health`
+- **Application Info**: `/actuator/info`
+- **Detailed Metrics**: `/actuator/metrics`
+- **Monitoring Summary**: `/api/monitoring/summary` (Admin access only)
+
+### Visualization
+
+A Grafana dashboard configuration is provided in the `monitoring` directory. To set up:
+
+1. Deploy Prometheus using the provided Kubernetes manifest
+2. Install Grafana and configure it to use Prometheus as a data source
+3. Import the dashboard configuration from `monitoring/grafana-dashboard.json`
+
+### Alerting
+
+For production deployments, configure alerting based on the following thresholds:
+
+- High error rate: > 1% errors over 5 minutes
+- High response time: 95th percentile > 500ms over 5 minutes
+- High CPU usage: > 80% for 5 minutes
+- High memory usage: > 85% for 5 minutes
+
+### Integration with External Systems
+
+The metrics are compatible with:
+- Prometheus
+- Grafana
+- ELK Stack
+- Cloud monitoring systems (AWS CloudWatch, Google Cloud Monitoring, etc.)
